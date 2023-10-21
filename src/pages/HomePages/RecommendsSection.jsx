@@ -84,14 +84,14 @@ const RecommendsSection = () => {
               <p>{product.description}</p>
               {cartItems.some((item) => item.id === product.id) ? (
                 <button
-                  className="bg-[#D9D9D9] hover:bg-[#1F2937] border-b-2 text-[#BB8506] px-4 py-2 mt-4 rounded-lg"
+                  className="mt-8 hover:bg-[#1F2937] border-b-4  px-4 py-2 rounded-lg hover:text-white border[#D9D9D9]"
                   onClick={() => handleRemoveFromCart(product.id)}
                 >
                   Remove from Cart
                 </button>
               ) : (
                 <button
-                  className="bg-[#D9D9D9] hover:bg-[#1F2937] border-b-2 text-[#BB8506] px-4 py-2 mt-4 rounded-lg"
+                  className="mt-8 hover:bg-[#1F2937] border-b-2  px-4 py-2 rounded-lg hover:text-white border[#D9D9D9]"
                   onClick={() => handleAddToCart(product)}
                 >
                   Add to Cart
@@ -99,8 +99,13 @@ const RecommendsSection = () => {
               )}
             </div>
           </div>
-        ))}
-              <ToastContainer/>
+        ))}   <button className="hover:bg-[#1F2937] border-b-4 hover:border-b-4 flex w-36 mx-auto  px-4 py-2 rounded-lg hover:text-white border[#D9D9D9]">
+              View full menu
+            </button>
+        <div>
+         
+        </div>
+        <ToastContainer />
       </div>
     </>
   );

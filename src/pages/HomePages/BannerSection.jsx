@@ -7,7 +7,7 @@ const BannerSection = () => {
   return (
     <div className="w-full">
       <Carousel infiniteLoop autoPlay interval={3000}>
-        <div className="w-full">
+        <div className="w-full h-[80vh]">
           <img
             src="https://i.ibb.co/HDHWqL9/pasta-spaghetti-with-shrimps-sauce.jpg"
             alt="Image 1"

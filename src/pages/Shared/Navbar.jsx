@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +21,8 @@ const Navbar = () => {
           <h1 className="text-3xl font-bold">Tasty Tryst</h1>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <a href="/">Home</a>
-          <a href="/menu">Menu</a>
+          <Link to="/">Home</Link>
+          <Link to="/menu">Menu</Link>
           <a href="/about">About Us</a>
           <a href="/contact">Contact</a>
         </div>
@@ -47,10 +48,10 @@ const Navbar = () => {
         <div className="md:hidden text-center">
           <ul className="bg-gray-800 mt-2 p-4">
             <li className="py-2">
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className="py-2">
-              <a href="/menu">Menu</a>
+              <Link to="/menu">Menu</Link>
             </li>
             <li className="py-2">
               <a href="/about">About Us</a>

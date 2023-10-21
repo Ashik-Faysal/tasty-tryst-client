@@ -7,14 +7,13 @@ const OurMenuSection = () => {
     backgroundSize: "cover",
     color: "white",
     textAlign: "center",
-    padding: "50px",
+      padding: "50px"
   };
 
   const today = new Date().toDateString(); // Format the date as a string
-  console.log(today);
 
   return (
-    <div style={sectionStyle} >
+    <div style={sectionStyle}  className="bg-fixed">
       <SectionTitle subHeading="Check it out" heading="From Our Menu" />
       <div className="grid md:grid-cols-2">
         <img
@@ -31,7 +30,7 @@ const OurMenuSection = () => {
             Eaque repellat recusandae ad laudantium tempore consequatur
             consequuntur omnis ullam maxime tenetur.
           </p>
-          <button className="pt-8 hover:bg-[#1F2937] border-b-2 text-stone-300 px-4 py-2 mt-4 rounded-lg">
+          <button className="mt-8 hover:bg-[#1F2937] border-b-2 text-stone-300 px-4 py-2 rounded-lg">
             Read more
           </button>
         </div>
