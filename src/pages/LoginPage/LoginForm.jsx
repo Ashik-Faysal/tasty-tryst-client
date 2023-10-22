@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const LoginForm = () => {
   const {
@@ -15,12 +16,17 @@ const LoginForm = () => {
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     if (data.password.length < 6) {
       setError("password", {
         type: "minLength",
         message: "Password must be at least 6 characters",
+      });
+      signIn(data.email, data.password).then((result) => {
+        const user = result.user;
+        console.log(user);
       });
       return;
     }
@@ -96,7 +102,11 @@ const LoginForm = () => {
         >
           Login
         </button>
+        <small>
+          New Here? <Link className="hover:underline" to="/register">register Here</Link>
+        </small>
       </form>
+
       <ToastContainer />
     </div>
   );
