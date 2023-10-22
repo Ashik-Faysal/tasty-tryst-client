@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hooks/useMenu";
 import FoodCard from "../../component/FoodCard";
+import Card from "../Shared/Card"
 
 const OrderPage = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -27,46 +28,22 @@ const OrderPage = () => {
           <Tab>Drinks</Tab>
         </TabList>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {salads.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+          <Card item={salads} />
         </TabPanel>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {pizzas.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+          <Card item={pizzas} />
         </TabPanel>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {desserts.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+          <Card item={desserts} />
         </TabPanel>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {soups.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+          <Card item={soups} />
         </TabPanel>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {offers.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+          <Card item={offers} />
         </TabPanel>
         <TabPanel>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4">
-            {drinks.map((item) => (
-              <FoodCard key={item._id} products={item} />
-            ))}
-          </div>
+         <Card item={drinks}/>
         </TabPanel>
       </Tabs>
     </>

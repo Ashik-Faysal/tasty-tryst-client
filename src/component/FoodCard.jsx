@@ -4,23 +4,18 @@ const FoodCard = ({ products }) => {
   const { _id, image, name, price, recipe } = products;
 
   const addToCart = () => {
-    // Retrieve the current cart from local storage or initialize an empty cart
+ 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Check if the product is already in the cart
     const isProductInCart = cart.some((product) => product._id === _id);
 
     if (isProductInCart) {
-      // Show an alert or toast indicating that the product is already in the cart
       toast.info(`${name} is already in your cart!`);
     } else {
-      // Add the product to the cart
       cart.push(products);
 
-      // Save the updated cart back to local storage
       localStorage.setItem("cart", JSON.stringify(cart));
 
-      // Show a toast message to confirm that the product has been added to the cart
       toast.success(`${name} has been added to your cart!`);
     }
   };
