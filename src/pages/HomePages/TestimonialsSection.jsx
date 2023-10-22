@@ -16,7 +16,7 @@ const Testimonials = () => {
 
   useEffect(() => {
     // Replace the URL with the correct path to your reviews JSON file
-    fetch("/reviews.json")
+    fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);

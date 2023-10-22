@@ -10,7 +10,7 @@ const DessertPage = () => {
   return (
     <section className="my-8">
       <DessertCover />
-      <SectionTitle heading="Today's" subHeading="Don't Miss" />
+      <SectionTitle heading="Today's Offer" subHeading="Don't Miss" />
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
         {desserts.map((item) => (
           <MenuItem key={item._id} item={item} />

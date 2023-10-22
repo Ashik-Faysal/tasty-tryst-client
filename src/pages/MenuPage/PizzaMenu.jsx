@@ -11,7 +11,6 @@ const PizzaMenu = () => {
   return (
     <section className="my-8">
       <PizzaCover />
-      {/* <SectionTitle heading="Today's" subHeading="Don't Miss" /> */}
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
         {popularItems.map((item) => (
           <MenuItem key={item._id} item={item} />
