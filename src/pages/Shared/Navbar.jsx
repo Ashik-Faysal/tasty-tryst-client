@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/">Home</Link>
           <Link to="/menu">Menu</Link>
-          <Link to="/order">Order</Link>
+          <Link to="/order">Our Shop</Link>
           <a href="/contact">Contact</a>
         </div>
         <div className="hidden md:block">
@@ -54,7 +54,7 @@ const Navbar = () => {
               <Link to="/menu">Menu</Link>
             </li>
             <li className="py-2">
-              <Link to="/order">Order</Link>
+              <Link to="/order">Our Shop</Link>
             </li>
             <li className="py-2">
               <a href="/contact">Contact</a>
