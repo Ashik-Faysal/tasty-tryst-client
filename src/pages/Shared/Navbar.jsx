@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+    const handleLogOut = () => {
+      logOut()
+        .then(() => {})
+        .then((error) => console.log(error));
+      navigate("/login");
+    };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -27,8 +36,8 @@ const Navbar = () => {
           <a href="/contact">Contact</a>
         </div>
         <div className="hidden md:block">
-          {isLoggedIn ? (
-            <button onClick={handleLogin} className="text-white">
+          {user ? (
+            <button onClick={handleLogOut} className="text-white">
               Log out
             </button>
           ) : (
@@ -60,15 +69,16 @@ const Navbar = () => {
               <a href="/contact">Contact</a>
             </li>
             <div>
-              {isLoggedIn ? (
+              {user ? (
                 <button
-                  onClick={handleLogin}
+                  onClick={handleLogOut}
                   className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
                 >
                   Log out
                 </button>
               ) : (
-                <Link to="/login"
+                <Link
+                  to="/login"
                   onClick={handleLogin}
                   className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
                 >
