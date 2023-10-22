@@ -4,6 +4,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/HomePages/Home/Home";
 import MenuPages from "../pages/MenuPage/MenuPages";
 import OrderPage from "../pages/OrderPage/OrderPage";
+import LoginForm from "../pages/LoginPage/LoginForm";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +21,13 @@ const router = createBrowserRouter([
         element: <MenuPages />,
       },
       {
-        path: "/order",
+        path: "order",
         element: <OrderPage />,
       },
+      {
+        path: "login",
+        element:<LoginForm/>
+      }
     ],
   },
 ]);

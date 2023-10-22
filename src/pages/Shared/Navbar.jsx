@@ -32,9 +32,9 @@ const Navbar = () => {
               Log out
             </button>
           ) : (
-            <button onClick={handleLogin} className="text-white">
+            <Link to="/login" onClick={handleLogin} className="text-white">
               Login
-            </button>
+            </Link>
           )}
         </div>
         <div className="md:hidden flex items-center">
@@ -68,12 +68,12 @@ const Navbar = () => {
                   Log out
                 </button>
               ) : (
-                <button
+                <Link to="/login"
                   onClick={handleLogin}
                   className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
                 >
                   Login
-                </button>
+                </Link>
               )}
             </div>
           </ul>
