@@ -5,6 +5,8 @@ import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hooks/useMenu";
 import FoodCard from "../../component/FoodCard";
 import Card from "../Shared/Card"
+import { Helmet } from "react-helmet-async";
+
 
 const OrderPage = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -17,6 +19,7 @@ const OrderPage = () => {
  const desserts = items.filter((item) => item.category === "dessert");
   return (
     <>
+      <Helmet><title>Tasty Tryst | Order</title></Helmet>
       <OrderCover />
       <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
         <TabList className={"text-center"}>
