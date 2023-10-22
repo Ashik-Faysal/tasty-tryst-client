@@ -1,22 +1,34 @@
+import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const FoodCard = ({ products }) => {
   const { _id, image, name, price, recipe } = products;
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const addToCart = () => {
- 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const isProductInCart = cart.some((product) => product._id === _id);
-
-    if (isProductInCart) {
-      toast.info(`${name} is already in your cart!`);
+  const addToCart = products => {
+    console.log(products);
+    if (user && user.email) {
+      const cartItem={menuItemId:_id, name,image, price, recipe, email: user.email}
+      fetch("http://localhost:5000/carts", {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body:JSON.stringify(cartItem)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.insertId) {
+            toast.success("successfully added");
+          }
+        })
+        
     } else {
-      cart.push(products);
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      toast.success(`${name} has been added to your cart!`);
+      navigate("/login");
     }
   };
 
@@ -32,7 +44,7 @@ const FoodCard = ({ products }) => {
         <h3 className="text-xl font-semibold mb-2">{name}</h3>
         <p>{recipe}</p>
         <button
-          className="mt-8 hover-bg-[#1F2937] border-b-4 px-4 py-2 rounded-lg hover-text-white border-orange-600 hover:bg-black hover:text-white"
+          className="mt-8 border-b-4 px-4 py-2 rounded-lg hover:text-white border-orange-600 hover:bg-black"
           onClick={addToCart}
         >
           Add to Cart
