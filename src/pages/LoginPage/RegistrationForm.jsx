@@ -7,23 +7,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/AuthProvider";
 
 const RegistrationForm = () => {
-  const { createUser } = useContext(AuthContext);
+  const {updateUserProfile, createUser} = useContext(AuthContext);
   const {
     handleSubmit,
     control,
     formState: { errors },
-    getValues,
     reset,
   } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     if (data) {
-      createUser(data.email, data.password);
+      createUser(data.email, data.password, data.photoURL).then(result => {
+        updateUserProfile(data.name, data.photoURL);
+       
+      })
       toast.success("Registration Successful");
       reset();
-      navigate("/login");
+      navigate("/");
     }
+    console.log(data);
   };
 
   const validatePassword = (value) => {
@@ -125,9 +128,30 @@ const RegistrationForm = () => {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-600" htmlFor="photoURL">
+            Photo URL
+          </label>
+          <Controller
+            name="photoURL"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                id="photoURL"
+                className={`w-full p-2 border rounded-md ${
+                  errors.photoURL ? "border-red-500" : ""
+                }`}
+                placeholder="Your photo URL"
+              />
+            )}
+          />
+        </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-semibold p-2 rounded-md hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white font-semibold p-2 rounded-md hover-bg-blue-600"
         >
           Register
         </button>

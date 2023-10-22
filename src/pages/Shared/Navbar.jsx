@@ -11,8 +11,6 @@ const Navbar = () => {
 
     const handleLogOut = () => {
       logOut()
-        .then(() => {})
-        .then((error) => console.log(error));
       navigate("/login");
     };
   const toggleMenu = () => {
@@ -45,9 +43,20 @@ const Navbar = () => {
         </div>
         <div className="hidden md:block">
           {user ? (
-            <button onClick={handleLogOut} className="btn-outline">
-              Log out
-            </button>
+            <div className="flex items-center gap-2">
+              <img
+                className="w-12 h-12 rounded-full"
+                src={user.photoURL}
+                alt={user.name}
+                loading="lazy"
+              />
+              <button
+                onClick={handleLogOut}
+                className="btn-outline"
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <Link to="/login" onClick={handleLogin} className="btn-outline">
               Login
@@ -86,12 +95,24 @@ const Navbar = () => {
             </li>
             <div>
               {user ? (
-                <button onClick={handleLogOut} className="btn-outline">
-                  Log out
-                </button>
+                <div className="text-white">
+                  <img
+                    className="w-12 mx-auto rounded-full transition duration-300 ease-in-out transform hover:scale-105"
+                    src={user.photoURL}
+                    alt=""
+                  />
+                  <button
+                    onClick={handleLogOut}
+                    className="btn-outline"
+                  >
+                    Login
+                  </button>
+                </div>
               ) : (
-                <Link to="/login" onClick={handleLogin} className="btn-outline">
-                  Login
+                <Link to="/login">
+                  <button className="btn-primary transition duration-300 ease-in-out transform hover:scale-105">
+                    Sign In
+                  </button>
                 </Link>
               )}
             </div>

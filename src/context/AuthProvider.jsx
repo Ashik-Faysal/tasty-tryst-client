@@ -18,9 +18,20 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = (email, password, photoURL) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
+        const user = userCredential.user;
+        return updateProfile(user, {
+          displayName: user.displayName,
+          photoURL: photoURL,
+        }).then(() => {
+          setUser(user);
+          setLoading(false);
+        });
+      }
+    );
   };
 
   const signIn = (email, password) => {
@@ -33,6 +44,14 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+   
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -42,10 +61,12 @@ const AuthProvider = ({ children }) => {
       return unsubscribe();
     };
   }, []);
+
   const signInWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider);
   };
+
   const authInfo = {
     auth,
     user,
@@ -54,6 +75,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     signInWithGoogle,
+    updateUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
