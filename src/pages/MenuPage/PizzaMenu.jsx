@@ -1,26 +1,19 @@
-import { useEffect, useState } from "react";
 import PizzaCover from "./PizzaCover";
-// import SectionTitle from "../Shared/SectionTitle";
 import MenuItem from "../Shared/MenuItem";
+import useMenu from "../../hooks/useMenu";
 
 
 
 const PizzaMenu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("/menu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === "pizza");
-        setMenu(popularItems);
-      });
-  }, []);
+  const [menu] = useMenu();
+  const popularItems = menu.filter((item) => item.category === "pizza");
+
   return (
     <section className="my-8">
-      <PizzaCover/>
+      <PizzaCover />
       {/* <SectionTitle heading="Today's" subHeading="Don't Miss" /> */}
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-        {menu.map((item) => (
+        {popularItems.map((item) => (
           <MenuItem key={item._id} item={item} />
         ))}
       </div>

@@ -1,23 +1,16 @@
 import { useEffect, useState } from "react";
 import MenuItem from "../Shared/MenuItem";
 import SaladsCover from "./SaladsCover";
+import useMenu from "../../hooks/useMenu";
 
 const SaladsMenu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("/menu.json")
-      .then((response) => response.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === "salad");
-        setMenu(popularItems);
-      });
-  }, []);
+  const [menu] = useMenu();
+  const salads = menu.filter((item) => item.category === "salad");
   return (
     <section className="my-8">
       <SaladsCover />
-      {/* <SectionTitle heading="Today's" subHeading="Don't Miss" /> */}
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-        {menu.map((item) => (
+        {salads.map((item) => (
           <MenuItem key={item._id} item={item} />
         ))}
       </div>
