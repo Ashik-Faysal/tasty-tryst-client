@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -40,6 +40,16 @@ const Navbar = () => {
           <a className="btn-outline" href="/contact">
             Contact
           </a>
+          <div className="flex items-center space-x-2">
+            <div className="relative">
+              {/* Shopping Cart Badge */}
+              <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-4">
+                2 {/* You can replace this with the actual cart count */}
+              </div>
+              {/* Shopping Cart Icon */}
+              <FaShoppingCart size={36} className=" text-white" />
+            </div>
+          </div>
         </div>
         <div className="hidden md:block">
           {user ? (
@@ -50,10 +60,7 @@ const Navbar = () => {
                 alt={user.name}
                 loading="lazy"
               />
-              <button
-                onClick={handleLogOut}
-                className="btn-outline"
-              >
+              <button onClick={handleLogOut} className="btn-outline">
                 Sign Out
               </button>
             </div>
@@ -101,10 +108,7 @@ const Navbar = () => {
                     src={user.photoURL}
                     alt=""
                   />
-                  <button
-                    onClick={handleLogOut}
-                    className="btn-outline"
-                  >
+                  <button onClick={handleLogOut} className="btn-outline">
                     Login
                   </button>
                 </div>
