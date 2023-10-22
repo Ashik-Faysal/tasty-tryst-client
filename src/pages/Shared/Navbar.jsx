@@ -27,28 +27,29 @@ const Navbar = () => {
     <nav className="bg-gray-800 text-white p-4 z-10 bg-opacity-30 absolute max-w-screen-2xl mx-auto w-full">
       <div className="mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-3xl font-bold">Tasty Tryst</h1>
+          <h1 className="text-3xl font-bold btn-outline">Tasty Tryst</h1>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <Link to="/">Home</Link>
-          <Link to="/menu">Menu</Link>
-          <Link to="/order">Our Shop</Link>
-          <a href="/contact">Contact</a>
+          <Link className="btn-outline" to="/">
+            Home
+          </Link>
+          <Link className="btn-outline" to="/menu">
+            Menu
+          </Link>
+          <Link className="btn-outline" to="/order">
+            Our Shop
+          </Link>
+          <a className="btn-outline" href="/contact">
+            Contact
+          </a>
         </div>
         <div className="hidden md:block">
           {user ? (
-            <button
-              onClick={handleLogOut}
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105"
-            >
+            <button onClick={handleLogOut} className="btn-outline">
               Log out
             </button>
           ) : (
-            <Link
-              to="/login"
-              onClick={handleLogin}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition transform hover:scale-105 duration-300 ease-in-out"
-            >
+            <Link to="/login" onClick={handleLogin} className="btn-outline">
               Login
             </Link>
           )}
@@ -64,31 +65,32 @@ const Navbar = () => {
         <div className="md:hidden text-center">
           <ul className="bg-gray-800 mt-2 p-4">
             <li className="py-2">
-              <Link to="/">Home</Link>
+              <Link className="btn-outline" to="/">
+                Home
+              </Link>
             </li>
             <li className="py-2">
-              <Link to="/menu">Menu</Link>
+              <Link className="btn-outline" to="/menu">
+                Menu
+              </Link>
             </li>
             <li className="py-2">
-              <Link to="/order">Our Shop</Link>
+              <Link className="btn-outline" to="/order">
+                Our Shop
+              </Link>
             </li>
             <li className="py-2">
-              <a href="/contact">Contact</a>
+              <a className="btn-outline" href="/contact">
+                Contact
+              </a>
             </li>
             <div>
               {user ? (
-                <button
-                  onClick={handleLogOut}
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
-                >
+                <button onClick={handleLogOut} className="btn-outline">
                   Log out
                 </button>
               ) : (
-                <Link
-                  to="/login"
-                  onClick={handleLogin}
-                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
-                >
+                <Link to="/login" onClick={handleLogin} className="btn-outline">
                   Login
                 </Link>
               )}
