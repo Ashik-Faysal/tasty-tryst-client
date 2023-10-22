@@ -3,7 +3,7 @@ import React from "react";
 const TitleSection = () => {
   return (
     <div
-      className="h-[60vh] bg-cover bg-center flex items-center justify-center my-8"
+      className="md:h-[60vh] bg-cover bg-center flex items-center justify-center my-8"
       style={{
         backgroundImage:
           'url("https://i.ibb.co/m8vM71G/pexels-piotr-arnoldes-6025811.jpg")',
