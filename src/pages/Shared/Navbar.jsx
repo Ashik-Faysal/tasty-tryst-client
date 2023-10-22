@@ -37,11 +37,18 @@ const Navbar = () => {
         </div>
         <div className="hidden md:block">
           {user ? (
-            <button onClick={handleLogOut} className="text-white">
+            <button
+              onClick={handleLogOut}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105"
+            >
               Log out
             </button>
           ) : (
-            <Link to="/login" onClick={handleLogin} className="text-white">
+            <Link
+              to="/login"
+              onClick={handleLogin}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition transform hover:scale-105 duration-300 ease-in-out"
+            >
               Login
             </Link>
           )}

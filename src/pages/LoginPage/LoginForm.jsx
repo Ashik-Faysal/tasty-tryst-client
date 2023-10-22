@@ -5,8 +5,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import { GrGoogle } from "react-icons/gr";
 
 const LoginForm = () => {
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
   const {
     handleSubmit,
     control,
@@ -16,25 +18,30 @@ const LoginForm = () => {
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { signIn } = useContext(AuthContext);
 
-  const onSubmit = (data) => {
-    if (data.password.length < 6) {
+  const onSubmit = async (data) => {
+    try {
+      await signIn(data.email, data.password);
+      toast.success("Login Successful");
+      reset();
+      navigate("/");
+    } catch (error) {
       setError("password", {
-        type: "minLength",
-        message: "Password must be at least 6 characters",
+        type: "serverError",
+        message: "Login failed. Please check your credentials.",
       });
-      signIn(data.email, data.password).then((result) => {
-        const user = result.user;
-        console.log(user);
-      });
-      return;
     }
+  };
 
-    // If password is valid, continue with the login process
-    toast.success("Login Successful");
-    reset();
-    navigate("/");
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success("Google login successful!");
+      reset();
+      navigate("/");
+    } catch (error) {
+      toast.error("Google login failed. Please try again.");
+    }
   };
 
   return (
@@ -57,12 +64,17 @@ const LoginForm = () => {
                 {...field}
                 type="text"
                 id="email"
-                className="w-full p-2 border rounded-md"
+                className={`w-full p-2 border rounded-md ${
+                  errors.email ? "border-red-500" : ""
+                }`}
                 placeholder="Your email"
                 required
               />
             )}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
         <div className="mb-4 relative">
           <label className="block text-gray-600" htmlFor="password">
@@ -78,7 +90,9 @@ const LoginForm = () => {
                   {...field}
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  className="w-full p-2 border rounded-md pr-10"
+                  className={`w-full p-2 border rounded-md pr-10 ${
+                    errors.password ? "border-red-500" : ""
+                  }`}
                   placeholder="Your password"
                   required
                 />
@@ -96,14 +110,26 @@ const LoginForm = () => {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-semibold p-2 rounded-md hover-bg-blue-600"
-        >
-          Login
-        </button>
+        <div className="grid md:grid-cols-2 justify-between">
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-semibold p-2 rounded-md hover:bg-blue-600"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="text-blue-500 border p-2 bg-gray-200 rounded-full hover:text-blue-700 mx-auto"
+          >
+            <GrGoogle size={36} />
+          </button>
+        </div>
         <small>
-          New Here? <Link className="hover:underline" to="/register">register Here</Link>
+          New Here?{" "}
+          <Link className="text-blue-500 hover:underline" to="/register">
+            Register Here
+          </Link>
         </small>
       </form>
 

@@ -22,7 +22,7 @@ const RegistrationForm = () => {
       createUser(data.email, data.password);
       toast.success("Registration Successful");
       reset();
-      navigate("/");
+      navigate("/login");
     }
   };
 
