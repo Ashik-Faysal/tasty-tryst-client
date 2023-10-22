@@ -15,7 +15,6 @@ const Home = () => {
       <Helmet>
         <title>Tasty Tryst | Home</title>
       </Helmet>
-
       <BannerSection />
       <SwiperSection />
       <TitleSection />
