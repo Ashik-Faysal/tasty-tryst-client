@@ -4,10 +4,10 @@ import useMenu from "../../hooks/useMenu";
 
 const TodaysOffer = () => {
   const [menu] = useMenu();
-  const offers = menu.filter(item=>item.category==="offer")
+  const offers = menu.filter((item) => item.category === "offered");
   return (
     <section className="my-8">
-      <SectionTitle heading="Today's" subHeading="Don't Miss" />
+      <SectionTitle heading="Today's Offer" subHeading="Don't Miss" />
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
         {offers.map((item) => (
           <MenuItem key={item._id} item={item} />
