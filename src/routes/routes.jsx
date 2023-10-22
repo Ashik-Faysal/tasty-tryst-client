@@ -3,12 +3,13 @@ import Main from "../layouts/Main";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/HomePages/Home/Home";
 import MenuPages from "../pages/MenuPage/MenuPages";
+import OrderPage from "../pages/OrderPage/OrderPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-        element: <Main />,
-        errorElement:<ErrorPage/>,
+    element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -16,9 +17,12 @@ const router = createBrowserRouter([
       },
       {
         path: "menu",
-        element:<MenuPages/>
-      }
-        
+        element: <MenuPages />,
+      },
+      {
+        path: "/order",
+        element: <OrderPage />,
+      },
     ],
   },
 ]);
