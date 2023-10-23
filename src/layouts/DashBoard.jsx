@@ -10,6 +10,10 @@ import {
   FaBars,
   FaUtensils,
   FaTimes,
+  
+  FaPlus,
+  FaCog,
+  FaUsers,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
@@ -17,6 +21,10 @@ import useCart from "../hooks/useCart";
 const Dashboard = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
   const [cart] = useCart();
+  
+  const isAdmin = true;
+
+
   const toggleSidebar = () => {
     setIsSmallScreen(!isSmallScreen);
   };
@@ -24,6 +32,7 @@ const Dashboard = () => {
   window.addEventListener("resize", () => {
     setIsSmallScreen(window.innerWidth <= 768);
   });
+
 
   return (
     <div className="bg-gray-100 h-screen">
@@ -35,38 +44,66 @@ const Dashboard = () => {
           </button>
         </div>
       ) : (
-        <div className="bg-blue-500 text-white w-64 py-4 fixed top-0 left-0 h-full flex flex-col">
+        <div className="bg-stone-500 text-white w-64 py-4 fixed top-0 left-0 h-full flex flex-col">
           <h1 className="text-3xl font-bold text-center mb-4">Tasty Tryst</h1>
           <ul className="pl-4">
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaHome className="mr-2 text-blue-300" />
-              <Link to="/">User Home</Link>
-            </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaCalendarAlt className="mr-2" />
-              <Link to="/dashboard/reservation">Reservation</Link>
-            </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaDollarSign className="mr-2" />
-              <Link to="/dashboard/payment-history">Payment History</Link>
-            </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaShoppingCart className="mr-2" />
-              <Link to="/dashboard/my-cart">My Cart</Link>
-              <div className="relative">
-                <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-8">
-                  {cart?.length || 0}
-                </div>
-              </div>
-            </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaStar className="mr-2" />
-              <Link to="/dashboard/add-review">Add Review</Link>
-            </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaBook className="mr-2" />
-              <Link to="/dashboard/my-booking">My Booking</Link>
-            </li>
+            {isAdmin ? (
+              <>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaHome className="mr-2 text-blue-300" />
+                  <Link to="/">Admin Home</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaPlus className="mr-2 text-green-300" />
+                  <Link to="/add-items">Add Items</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaCog className="mr-2 text-purple-300" />
+                  <Link to="/management">Management</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaCog className="mr-2 text-purple-300" />
+                  <Link to="/manage-bookings">Manage Bookings</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaUsers className="mr-2 text-red-300" />
+                  <Link to="/dashboard/all-users">All Users</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaHome className="mr-2 text-blue-300" />
+                  <Link to="/">User Home</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaCalendarAlt className="mr-2" />
+                  <Link to="/dashboard/reservation">Reservation</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaDollarSign className="mr-2" />
+                  <Link to="/dashboard/payment-history">Payment History</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaShoppingCart className="mr-2" />
+                  <Link to="/dashboard/my-cart">My Cart</Link>
+                  <div className="relative">
+                    <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-8">
+                      {cart?.length || 0}
+                    </div>
+                  </div>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaStar className="mr-2" />
+                  <Link to="/dashboard/add-review">Add Review</Link>
+                </li>
+                <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
+                  <FaBook className="mr-2" />
+                  <Link to="/dashboard/my-booking">My Booking</Link>
+                </li>
+              </>
+            )}
+
             <li className="mb-4">
               <hr />
             </li>
