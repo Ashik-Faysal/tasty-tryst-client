@@ -3,14 +3,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css"; 
+import useCart from "../hooks/useCart";
 
 const FoodCard = ({ products }) => {
   const { _id, image, name, price, recipe } = products;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [, refetch] = useCart();
 
   const addToCart = products => {
-    console.log(products);
     if (user && user.email) {
       const cartItem={menuItemId:_id, name,image, price, recipe, email: user.email}
       fetch("http://localhost:5000/carts", {
@@ -23,6 +24,7 @@ const FoodCard = ({ products }) => {
         .then((response) => response.json())
         .then((data) => {
           if (data.insertId) {
+            refetch();
             toast.success("successfully added");
           }
         })

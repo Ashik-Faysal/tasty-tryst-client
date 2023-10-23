@@ -1,24 +1,21 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
-
-    const handleLogOut = () => {
-      logOut()
-      navigate("/");
-    };
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const [cart] = useCart();
+  const handleLogOut = () => {
+    logOut();
+    navigate("/");
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -37,17 +34,15 @@ const Navbar = () => {
           <Link className="btn-outline" to="/order">
             Our Shop
           </Link>
-          <a className="btn-outline" href="/contact">
+          <Link className="btn-outline" to="/contact">
             Contact
-          </a>
+          </Link>
           <div className="flex items-center space-x-2">
             <div className="relative">
-              {/* Shopping Cart Badge */}
               <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-4">
-                2 {/* You can replace this with the actual cart count */}
+                {cart?.length || 0}
               </div>
-              {/* Shopping Cart Icon */}
-              <FaShoppingCart size={36} className=" text-white" />
+              <FaShoppingCart size={36} className="text-white" />
             </div>
           </div>
         </div>
@@ -55,7 +50,7 @@ const Navbar = () => {
           {user ? (
             <div className="flex items-center gap-2">
               <img
-                className="w-12 h-12 rounded-full"
+                className="w-6 h-6 rounded-full"
                 src={user.photoURL}
                 alt={user.name}
                 loading="lazy"
@@ -65,7 +60,7 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <Link to="/login" onClick={handleLogin} className="btn-outline">
+            <Link to="/login" className="btn-outline">
               Login
             </Link>
           )}
@@ -96,9 +91,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="py-2">
-              <a className="btn-outline" href="/contact">
+              <Link className="btn-outline" to="/contact">
                 Contact
-              </a>
+              </Link>
             </li>
             <div>
               {user ? (
@@ -109,7 +104,7 @@ const Navbar = () => {
                     alt=""
                   />
                   <button onClick={handleLogOut} className="btn-outline">
-                    Login
+                    Logout
                   </button>
                 </div>
               ) : (
