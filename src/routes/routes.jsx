@@ -8,6 +8,7 @@ import LoginForm from "../pages/LoginPage/LoginForm";
 import RegistrationForm from "../pages/LoginPage/RegistrationForm";
 import Dashboard from "../layouts/DashBoard";
 import MyCart from "../pages/DashBoard/MyCart";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "my-cart",
