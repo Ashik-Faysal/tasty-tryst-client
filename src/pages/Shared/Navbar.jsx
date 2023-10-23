@@ -37,14 +37,14 @@ const Navbar = () => {
           <Link className="btn-outline" to="/contact">
             Contact
           </Link>
-          <div className="flex items-center space-x-2">
+          <Link to="/dashboard/my-cart" className="flex items-center space-x-2">
             <div className="relative">
               <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-4">
                 {cart?.length || 0}
               </div>
               <FaShoppingCart size={36} className="text-white" />
             </div>
-          </div>
+          </Link>
         </div>
         <div className="hidden md:block">
           {user ? (

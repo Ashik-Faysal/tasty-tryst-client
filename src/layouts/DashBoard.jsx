@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import {
   FaHome,
-  FaPlus,
-  FaCog,
-  FaUsers,
-  FaUtensils,
+  FaCalendarAlt,
+  FaDollarSign,
   FaShoppingCart,
+  FaStar,
+  FaBook,
   FaPhone,
   FaBars,
+ 
+FaUtensils,
+  
   FaTimes,
 } from "react-icons/fa";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
@@ -34,45 +37,50 @@ const Dashboard = () => {
         </div>
       ) : (
         <div className="bg-blue-500 text-white w-64 py-4 fixed top-0 left-0 h-full flex flex-col">
-          <h1 className="text-3xl font-bold text-center">Tasty Tryst</h1>
-          <ul className="mt-8 pl-8">
-            {/* Sidebar items */}
+          <h1 className="text-3xl font-bold text-center mb-4">Tasty Tryst</h1>
+          <ul className="pl-4">
             <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaHome className="mr-2 text-blue-300" />
-              <a href="/">Admin Home</a>
+              <Link to="/">User Home</Link>
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaPlus className="mr-2 text-green-300" />
-              <a href="/add-items">Add Items</a>
+            <li className="flex items-center mb-2">
+              <FaCalendarAlt className="mr-2" />
+              <Link to="/dashboard/reservation">Reservation</Link>
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaCog className="mr-2 text-purple-300" />
-              <a href="/management">Management</a>
+            <li className="flex items-center mb-2">
+              <FaDollarSign className="mr-2" />
+              <Link to="/dashboard/payment-history">Payment History</Link>
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaCog className="mr-2 text-purple-300" />
-              <a href="/manage-bookings">Manage Bookings</a>
+            <li className="flex items-center mb-2">
+              <FaShoppingCart className="mr-2" />
+              <Link to="/dashboard/my-cart">My Cart</Link>
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaUsers className="mr-2 text-red-300" />
-              <a href="/all-users">All Users</a>
+            <li className="flex items-center mb-2">
+              <FaStar className="mr-2" />
+              <Link to="/dashboard/add-review">Add Review</Link>
             </li>
-            <hr className="my-4 border-gray-400" />
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaHome className="mr-2 text-blue-300" />
-              <a href="/">Home</a>
+            <li className="flex items-center mb-2">
+              <FaBook className="mr-2" />
+              <Link to="/dashboard/my-booking">My Booking</Link>
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaUtensils className="mr-2 text-green-300" />
-              <a href="/menu">Menu</a>
+            <li className="mb-4">
+              <hr />
             </li>
-            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaShoppingCart className="mr-2 text-yellow-300" />
-              <a href="/shop">Shop</a>
+            <li className="flex items-center mb-2">
+              <FaHome className="mr-2" />
+              <Link to="/">Home</Link>
             </li>
-            <li className="flex items-center hover:text-yellow-500 transition duration-300 ease-in-out">
-              <FaPhone className="mr-2 text-pink-300" />
-              <a href="/contact">Contact</a>
+            <li className="flex items-center mb-2">
+              <FaUtensils className="mr-2" />
+              <Link to="/menu">Menu</Link>
+            </li>
+            <li className="flex items-center mb-2">
+              <FaShoppingCart className="mr-2" />
+              <Link to="/shop">Shop</Link>
+            </li>
+            <li className="flex items-center">
+              <FaPhone className="mr-2" />
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -80,10 +88,11 @@ const Dashboard = () => {
 
       {/* Content */}
       <div className={isSmallScreen ? "p-8" : "ml-64 p-8"}>
-        {/* Main content */}
+        <Outlet />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+    
