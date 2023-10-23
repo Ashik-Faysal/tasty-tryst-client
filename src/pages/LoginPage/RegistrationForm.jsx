@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/AuthProvider";
 
 const RegistrationForm = () => {
-  const {updateUserProfile, createUser} = useContext(AuthContext);
+  const { updateUserProfile, createUser } = useContext(AuthContext);
   const {
     handleSubmit,
     control,
@@ -18,15 +18,27 @@ const RegistrationForm = () => {
 
   const onSubmit = (data) => {
     if (data) {
-      createUser(data.email, data.password, data.photoURL).then(result => {
-        updateUserProfile(data.name, data.photoURL);
-       
-      })
-      toast.success("Registration Successful");
-      reset();
-      navigate("/");
+      createUser(data.email, data.password, data.photoURL).then((result) => {
+        updateUserProfile(data.name, data.photoURL).then(() => {
+          const saveUser = {name: data.name,email: data.email}
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                toast.success("Registration Successful");
+                reset();
+                navigate("/");
+              }
+            });
+        });
+      });
     }
-    console.log(data);
   };
 
   const validatePassword = (value) => {
