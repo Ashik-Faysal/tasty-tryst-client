@@ -46,7 +46,7 @@ const MyCart = () => {
           </thead>
           <tbody>
             {cart.map((item, index) => (
-              <tr key={item.id} className="text-center bg-gray-400">
+              <tr key={item._id} className="text-center bg-gray-400">
                 <td className="p-2 w-8">{index + 1}.</td>
                 <td className="p-2">
                   <img
