@@ -5,6 +5,7 @@ import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/AuthProvider";
+import SocialLogin from "./SocialLogin";
 
 const RegistrationForm = () => {
   const { updateUserProfile, createUser } = useContext(AuthContext);
@@ -167,6 +168,7 @@ const RegistrationForm = () => {
         >
           Register
         </button>
+        <SocialLogin/>
         <small>
           Already Have an Account? <Link to="/login">Login Here</Link>
         </small>

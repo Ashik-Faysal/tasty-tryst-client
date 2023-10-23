@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { GrGoogle } from "react-icons/gr";
+import SocialLogin from "./SocialLogin";
 
 const LoginForm = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -33,16 +34,16 @@ const LoginForm = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      await signInWithGoogle();
-      toast.success("Google login successful!");
-      reset();
-      navigate("/");
-    } catch (error) {
-      toast.error("Google login failed. Please try again.");
-    }
-  };
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     await signInWithGoogle();
+  //     toast.success("Google login successful!");
+  //     reset();
+  //     navigate("/");
+  //   } catch (error) {
+  //     toast.error("Google login failed. Please try again.");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -117,13 +118,14 @@ const LoginForm = () => {
           >
             Login
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={handleGoogleLogin}
             className="text-blue-500 border p-2 bg-gray-200 rounded-full hover:text-blue-700 mx-auto"
           >
             <GrGoogle size={36} />
-          </button>
+          </button> */}
+          <SocialLogin/>
         </div>
         <small>
           New Here?{" "}
