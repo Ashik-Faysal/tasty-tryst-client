@@ -6,6 +6,8 @@ import MenuPages from "../pages/MenuPage/MenuPages";
 import OrderPage from "../pages/OrderPage/OrderPage";
 import LoginForm from "../pages/LoginPage/LoginForm";
 import RegistrationForm from "../pages/LoginPage/RegistrationForm";
+import Dashboard from "../layouts/DashBoard";
+import MyCart from "../pages/DashBoard/MyCart";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,16 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegistrationForm />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "my-cart",
+        element: <MyCart />,
       },
     ],
   },
