@@ -8,16 +8,15 @@ import {
   FaBook,
   FaPhone,
   FaBars,
- 
-FaUtensils,
-  
+  FaUtensils,
   FaTimes,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
-
+  const [cart] = useCart();
   const toggleSidebar = () => {
     setIsSmallScreen(!isSmallScreen);
   };
@@ -54,6 +53,11 @@ const Dashboard = () => {
             <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaShoppingCart className="mr-2" />
               <Link to="/dashboard/my-cart">My Cart</Link>
+              <div className="relative">
+                <div className="bg-red-500 text-white w-6 h-6 rounded-full text-center absolute -top-4 -right-8">
+                  {cart?.length || 0}
+                </div>
+              </div>
             </li>
             <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaStar className="mr-2" />
@@ -95,4 +99,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-    
