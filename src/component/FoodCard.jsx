@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import "react-toastify/dist/ReactToastify.css"; 
 
 const FoodCard = ({ products }) => {
   const { _id, image, name, price, recipe } = products;
