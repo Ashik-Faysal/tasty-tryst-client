@@ -43,38 +43,38 @@ const Dashboard = () => {
               <FaHome className="mr-2 text-blue-300" />
               <Link to="/">User Home</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaCalendarAlt className="mr-2" />
               <Link to="/dashboard/reservation">Reservation</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaDollarSign className="mr-2" />
               <Link to="/dashboard/payment-history">Payment History</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaShoppingCart className="mr-2" />
               <Link to="/dashboard/my-cart">My Cart</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaStar className="mr-2" />
               <Link to="/dashboard/add-review">Add Review</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaBook className="mr-2" />
               <Link to="/dashboard/my-booking">My Booking</Link>
             </li>
             <li className="mb-4">
               <hr />
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaHome className="mr-2" />
               <Link to="/">Home</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaUtensils className="mr-2" />
               <Link to="/menu">Menu</Link>
             </li>
-            <li className="flex items-center mb-2">
+            <li className="flex items-center mb-4 hover:text-yellow-500 transition duration-300 ease-in-out">
               <FaShoppingCart className="mr-2" />
               <Link to="/shop">Shop</Link>
             </li>

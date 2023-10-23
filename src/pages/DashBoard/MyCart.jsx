@@ -1,10 +1,25 @@
-import React from "react";
 import useCart from "../../hooks/useCart";
 import { Helmet } from "react-helmet-async";
+import { FaTrash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 
 const MyCart = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
   const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const handleDelete = (item) => {
+    fetch(`http://localhost:5000/carts/${item._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          console.log(item._id);
+          refetch();
+          toast.success("Deleted successfully");
+        }
+      });
+  };
 
   return (
     <>
@@ -18,10 +33,10 @@ const MyCart = () => {
           Pay
         </button>
       </div>
-      <div className="w-full overflow-x-auto">
+      <div className="w-3/5 overflow-x-auto mx-auto">
         <table className="w-full bg-white shadow-lg rounded">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-gray-300 ">
               <th className="p-2">Serial Number</th>
               <th className="p-2">Image</th>
               <th className="p-2">Name</th>
@@ -31,7 +46,7 @@ const MyCart = () => {
           </thead>
           <tbody>
             {cart.map((item, index) => (
-              <tr key={item.id} className="text-center">
+              <tr key={item.id} className="text-center bg-gray-400">
                 <td className="p-2 w-8">{index + 1}.</td>
                 <td className="p-2">
                   <img
@@ -43,14 +58,18 @@ const MyCart = () => {
                 <td className="p-2">{item.name}</td>
                 <td className="p-2">${item.price}</td>
                 <td className="p-2">
-                  <button className="text-white bg-red-500 rounded-md px-2 py-1">
-                    Remove
+                  <button
+                    onClick={() => handleDelete(item)}
+                    className="text-white bg-red-500 rounded-md px-2 py-1"
+                  >
+                    <FaTrash size={24} />
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <ToastContainer />
       </div>
     </>
   );
